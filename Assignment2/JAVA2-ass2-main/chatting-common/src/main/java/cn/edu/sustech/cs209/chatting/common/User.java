@@ -21,65 +21,64 @@ public class User implements Serializable {
   private int head;
   private char sex;
 
-  public User(String password, String nickname, char sex, int head){
+  public User(String password, String nickname, char sex, int head) {
     this.password = password;
     this.sex = sex;
     this.head = head;
-    if(nickname.equals("")||nickname==null)
-    {
+    if (nickname.equals("") || nickname == null) {
       this.nickname = "未命名";
-    }else{
+    } else {
       this.nickname = nickname;
     }
   }
 
-  public User(long id, String password){
+  public User(long id, String password) {
     this.id = id;
     this.password = password;
   }
 
-  public long getId(){
-    return  id;
+  public long getId() {
+    return id;
   }
 
-  public void setId(long id){
+  public void setId(long id) {
     this.id = id;
   }
 
-  public void setPassword(String password){
+  public void setPassword(String password) {
     this.password = password;
   }
 
-  public String getPassword(){
+  public String getPassword() {
     return password;
   }
 
-  public void setSex(char sex){
-    this.sex=sex;
+  public void setSex(char sex) {
+    this.sex = sex;
   }
 
-  public char getSex(){
+  public char getSex() {
     return this.sex;
   }
 
-  public void setNickname(String nickname){
+  public void setNickname(String nickname) {
     this.nickname = nickname;
   }
 
-  public String getNickname(){
+  public String getNickname() {
     return this.nickname;
   }
 
-  public void setHead(int head){
+  public void setHead(int head) {
     this.head = head;
   }
 
-  public int getHead(){
+  public int getHead() {
     return this.head;
   }
 
-  public ImageIcon getHeadIcon(){
-    ImageIcon image = new ImageIcon("images/"+head+".png");
+  public ImageIcon getHeadIcon() {
+    ImageIcon image = new ImageIcon("images/" + head + ".png");
     return image;
   }
 
@@ -88,7 +87,7 @@ public class User implements Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + head;
-    result = prime * result + (int)(id ^ (id >> 32));
+    result = prime * result + (int) (id ^ (id >> 32));
     result = prime * result + ((nickname == null) ? 0 : nickname.hashCode());
     result = prime * result + ((password == null) ? 0 : password.hashCode());
     result = prime * result + sex;
@@ -97,25 +96,25 @@ public class User implements Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if(this == obj)
+    if (this == obj)
       return true;
-    if(obj == null)
+    if (obj == null)
       return false;
-    if(getClass() != obj.getClass())
+    if (getClass() != obj.getClass())
       return false;
     User other = (User) obj;
-    if(head != other.head || id != other.id || sex != other.sex)
+    if (head != other.head || id != other.id || sex != other.sex)
       return false;
-    if(nickname == null){
-      if(other.nickname != null)
+    if (nickname == null) {
+      if (other.nickname != null)
         return false;
-    }else if(!nickname.equals(other.nickname))
+    } else if (!nickname.equals(other.nickname))
       return false;
-    if(password == null){
-      if(other.password != null)
+    if (password == null) {
+      if (other.password != null)
         return false;
-    }else if(!password.equals(other.password))
-      return  false;
+    } else if (!password.equals(other.password))
+      return false;
     return true;
   }
 
