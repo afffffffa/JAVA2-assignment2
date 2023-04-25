@@ -1,0 +1,157 @@
+数据处理分为了几步：
+首先是对题目所给出的近3500条数据进行异常值处理，包括对三条有缺失值数据的去除。而两个表都存在个别偏离总体较明显的异常值，由于数据量本身不大，暂时保留。
+The data processing is divided into several steps:
+
+The first is the outlier processing of nearly 3,500 pieces of data given by the title. Including the removal of three pieces of data with missing values. Both tables have outliers that deviate significantly from the population. As the data volume itself is not large, it is temporarily retained.
+并对提供的官方数据进行分析。分析结果如下：
+And analyze the official data provided. The analysis results are as follows:
+【【【【【【【【【】】】】】】】】
+M类船的价格分布在200,000左右，C类船的价格分布在500,000左右
+欧洲意大利英国西班牙的公司相对较多，加勒比美国的公司相对较少。
+不同品牌和型号在不同的地域市场也不同。
+欧洲所统计到的帆船售卖时间相对集中，美洲相对分散。
+帆船在佛州和加州的售价与其他美国地区相比较高。
+长度较长的价格普遍更贵。
+年数越新的也相对较贵。
+欧洲的帆船相对美国更长。
+The price distribution of Class M ships is around 200,000. The price distribution of Class C ships is around 500,000.
+
+Europe, Italy, Britain and Spain are relatively more companies. There are relatively few American companies in the Caribbean.
+
+Different brands and models are different in different geographical markets.
+
+In Europe, sailboat sales time is relatively concentrated. Sailboat sales in the Americas are relatively scattered.
+
+Sailboats sell for more in Florida and California than in other parts of the country.
+
+Longer lengths are generally more expensive.
+
+The newer they are, the more expensive they are.
+
+European sailboats are longer than American ones.
+其次是对新的数据集的查找，我们为了收集不同种类船只的信息以综合其性能因子，从船舶论坛和船舶销售网站等进行对船的信息的收集，其中包括了：
+Second, we search for new data sets. We collect information on different types of ships to synthesize their performance factors. We collect ship information from ship forums and ship sales websites, including:
+
+https://www.cruisersforum.com/forums/
+https://www.sailnet.com/forums/
+https://www.yachtworld.com/
+https://sailboatdata.com/
+https://sailboat.guide/
+
+收集到的因子有：
+The factors collected are:
+['Name','Builder', 'Designer', 'Hull', 'Keel', 'Rudder', 'Construction', 'LOA', 'LWL', 'Beam', 'Draft', 'Displacement', 'Ballast', 'Sail Area', 'Hull Speed', 'Waterline Length', 'Sail Area/Displacement', 'Ballast/Displacement', 'Displacement/Length', 'Comfort Ratio', 'Capsize Screening', 'Associations', 'Boat Type', 'Length Overall']
+收集这些因子的原因有：
+The reasons for collecting these factors are:
+
+
+Name：即搜索出的种类名称，有助于确认数据是否可靠
+Buider：制造商，可以表示帆船的制造质量和品牌，有助于确认数据是否可靠
+Designer：设计师，不同的设计师代表不同的设计水准及风格，高水平的设计师所设计出的船只可能更受欢迎。
+Hull：船体材料，例如纤维玻璃、木材、铝合金等。船体材料可能影响帆船的价格和性能。
+Keel：龙骨材料，例如铸铁、铅、钢、木材等。龙骨材料可能影响帆船的价格和性能。
+Rudder：舵的材料和类型，例如铝合金舵、木舵等。舵的材料和类型可能影响帆船的价格和性能。
+Construction：建造方式，例如手工建造、模压建造等。建造方式可能影响帆船的价格和质量。
+LOA：船体总长（水线前至水线后），可以表示帆船的大小。
+LWL：水线长度，可以表示帆船的速度和航行能力。
+Beam：船体宽度，可以表示帆船的稳定性和舱室宽度。
+Draft：吃水深度，可以表示帆船的适航性和航行能力。
+Displacement：排水量，可以表示帆船的重量和载重能力。
+Ballast：压舱物，可以表示帆船的稳定性和航行能力。
+Sail Area：帆面积，可以表示帆船的推进能力。
+Hull Speed：船体航速，可以表示帆船的最高速度。
+Waterline Length：水线长度，可以表示帆船的速度和航行能力。
+Sail Area/Displacement：帆面积与排水量的比值，可以表示帆船的推进能力。
+Ballast/Displacement：压舱物与排水量的比值，可以表示帆船的稳定性和航行能力。
+Displacement/Length：排水量与船长的比值，可以表示帆船的性能和速度。
+Comfort Ratio：舒适度指数，可以表示帆船的舒适度。
+Capsize Screening：翻船安全指数，可以表示帆船的安全性。
+Associations：所属协会或赛事，可以表示帆船的品牌和性能。
+Boat Type：帆船类型，例如滑行帆船、多体帆船、单桅帆船等。帆船类型可以表示帆船的性能和用途。
+Length Overall: 帆船的总长，通常以英尺或米为单位。这个指标和船舱的数量、装备和设施一起决定了船的大小和舒适度，也是定价的一个因素。
+
+Name: indicates the name of the search category, which helps to determine whether the data is reliable
+
+Buider: Manufacturer, can indicate the build quality and brand of sailboat. Helps to verify that the data is reliable
+
+-Leonard: I'm a Designer. Different designers represent different design levels and styles. Ships designed by highly qualified designers may be more popular.
+
+The material of the Hull. Such as fiber glass, wood, aluminum alloy and so on. Hull materials can affect the price and performance of sailboats.
+
+Keel: Keel material. Such as cast iron, lead, steel, wood and so on. Keel material may affect the price and performance of sailboats.
+
+Rudder: Material and type of rudder, such as aluminum rudder, wood rudder, etc. The material and type of rudder may affect the price and performance of a sailboat.
+
+Construction: Construction method, such as manual construction, molding construction, etc. The way ships are built can affect their price and quality.
+
+LOA: Length of hull (from front to back of the waterline), which can indicate the size of the sailboat.
+
+LWL: The length of the waterline, which can indicate the speed and sailing ability of a sailboat.
+
+Beam: Hull width, which indicates the stability and cabin width of a sailboat.
+
+Draft: The depth of draft, which can indicate the seaworthiness and sailing ability of the sailboat.
+
+Displacement: The amount of water displaced, which can represent the weight and carrying capacity of a sailboat.
+
+Ballast: indicates the stability and navigability of a sailing vessel.
+
+Sail Area: Sail area indicates the propulsion capability of a sailing vessel.
+
+The Hull Speed is the highest speed of a ship.
+
+Waterline Length: The length of the waterline, which indicates the speed and sailing ability of the vessel.
+
+Sail Area/Displacement: The ratio of sail area to displacement that represents the propulsion capability of the sail.
+
+Ballast/Displacement: The ratio of ballast to water displacement that can indicate how stable and navigable the boat is.
+
+Displacement/Length: The ratio of displacement to length that represents the performance and speed of the sailboat.
+
+Comfort Ratio: comfort index, which can indicate the comfort of a sailing boat.
+
+Capsize Screening: Capsize Screening shows the safety of sailboats.
+
+A boat's brand or performance is not an association.
+
+Boat Type: Boat type, such as skis, hulls, sloop, etc. The type of sailboat can indicate the performance and purpose of the sailboat.
+
+Length Overall: The total length of a sailboat, usually in feet or meters. This metric, together with the number of cabins, equipment and facilities, determines the size and comfort of the ship. It's also a factor in pricing.
+
+ 
+
+
+
+在数据收集时，主要着重于三点：多样化，可靠性，数据完整性。
+考虑到原数据集的类型名称并不规范，我们采用了几种办法分别进行采集，然后再根据不同的方式进行对官方表融合。
+首先是对不同种类的船只进行去重，只留下型号和对应的公司，在各个网站上通过型号和公司进行搜索并保存各个因数。
+其次是将公司放在所有型号只为数字的型号前融合成新的搜索型号，原因是由于一些网站搜索时只通过单有数字的型号不能得出最好的结果，其制造公司没有被列入网站信息中，而名称中有制造公司。
+最后是将所有的公司放到型号的前面融合成新的搜索型号，以便于将某些官方数据为数字+版本的和其他模糊不清的型号提供更好的结果。
+将这三种表的结果进行初次鉴别，首先的鉴别方式是其名称的匹配程度必须分别大于0.7，0.8，0.6.且名称中数字的匹配程度必须大于0.8（考虑到有一些版本会在中间加入小数点，或者后面加0，但是版本其实一致）。
+接着手动对明显错误的值进行筛选删除。
+然后将初步筛选的三个表左连接到一个表中，这个表包含了三个表的所有信息。接着以三个表的优先级由高到低的程度对第一个表的空余列进行填补。即第一个表的一行中缺失了什么信息则去此行后面表所提供的信息中依次寻找并填补。这样可以最大限度的保证数据的完整性，从而提供更多的数据进行分析。
+最后将其他两个表的对应列进行删除，对有空余的行进行删除，使得数据变得更加简洁化。
+In data collection, the main focus is on three points: diversity, reliability, and data integrity.
+
+Considering that the type name of the original data set is not standard, we adopt several methods to collect separately. The official table is then fused in different ways.
+
+
+
+The first is to de-weight different types of ships, leaving only the model and the corresponding company. Search and save factors by model and company on various websites.
+
+The second is to synthesize the new search model by placing the company in front of all models that are only digital. The reason for this is that some websites do not give the best results by searching only by the number model. Its manufacturing company is not listed on the website information, but the name of the manufacturing company.
+
+Finally, all the companies are put in front of the model and merged into the new search model. In order to provide better results for some official data for digital + versions and other obscure models.
+
+The results of these three tables were first identified. The first method of identification is that the matching degree of the name must be greater than 0.7, 0.8, 0.6 respectively. The number in the name must match more than 0.8 (consider that some versions have a decimal point in the middle or a 0 after it, but the versions are the same).
+
+Then manually filter and delete values that are obviously wrong.
+
+The three preliminary filtered tables are then left joined into one table. This table contains all the information for the three tables. The empty columns of the first table are then filled in order of priority of the three tables. What information is missing from a row in the first table is found and filled in from the information provided by the table that follows the row. In this way, data integrity can be ensured to the maximum extent, thus providing more data for analysis.
+
+Finally, the corresponding columns of the other two tables are deleted. Delete rows that are empty. It makes the data more concise.
+
+ 
+最后所得到的因子和数据大概如下图：
+
+Finally, the factors and data obtained are roughly as follows:
